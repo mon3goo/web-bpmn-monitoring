@@ -1,0 +1,64 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<header th:insert="header :: header"></header>
+<head>
+<script
+	src="/mon3goo.web.bpmn.monitoring/js/app.engine.process.definition.list.js"></script>
+</head>
+<div th:fragment="home" id="inner_monitoring_area"
+	class="inner_monitoring_area">
+	<div class="container-fluid">
+		<form action="#" th:object="${engineConfig}">
+			<div class="card border-primary mb-3">
+				<div class="card-header">Process definitions</div>
+				<div class="card-body text-primary">
+					<!-- 					<h5 class="card-title">List</h5> -->
+					<table class="table" id="definitionsList">
+						<thead>
+							<tr>
+								<th class="text-center" width="5%"><input type="checkbox"
+									th:name="chkAllReports" id="chkAllEngines"
+									th:onclick="'javascript:checkAllEngines()'" /></th>
+								<th scope="col">Process</th>
+								<th scope="col">Active instances</th>
+								<th scope="col">With error</th>
+							</tr>
+						</thead>
+						<tbody>
+							<th:block
+								th:each="definition : ${flowableProcessDefinitionList.flowableProcessDefinitionData}">
+								<tr>
+									<td class="text-center"><input type="checkbox"
+										th:name="'chkDefinition_' + ${definition.key}"
+										th:id="'chkDefinition_' + ${definition.key}"
+										th:onclick="javascript:checkDefinition(this.getAttribute('definitionId'))"
+										class="enginesCheckBox" /></td>
+									<td
+										th:onclick="javascript:loadDefinitionDetail(this.getAttribute('definitionId'))">
+										<label th:text="${definition.name}"
+										th:definitionKey="${definition.key}"
+										th:definitionId="${definition.id}"
+										class="menuLabel processDefinitionName"
+										id="processDefinitionName"
+										th:onclick="javascript:showMonitoringOption(this.getAttribute('definitionId'))"></label>
+									</td>
+									<td
+										th:onclick="javascript:loadDefinitionDetail(this.getAttribute('definitionId'))">
+										<label
+										th:id="'definitionActiveInstances_' + ${definition.key}"
+										class="menuLabel"></label>
+									</td>
+									<td
+										th:onclick="javascript:loadDefinitionDetail(this.getAttribute('definitionId'))">
+										<label
+										th:id="'definitionActiveInstancesWithError_' + ${definition.key}"
+										class="menuLabel"></label>
+									</td>
+								</tr>
+							</th:block>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

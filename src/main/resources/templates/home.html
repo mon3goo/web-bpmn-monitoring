@@ -1,0 +1,21 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<header th:insert="header :: header"></header>
+<head>
+	<script src="/mon3goo.web.bpmn.monitoring/js/app.home.js"></script>
+</head>
+
+<div th:fragment="home" id="work_area" class="work_area">
+	<nav class="nav nav-pills flex-column flex-sm-row">	
+		<th:block th:each="option : ${menuOptions}">
+			<a class="nav-link" href="#"> 
+				<label th:text="${option.label}" th:data1="${option.uri}" class="menuLabel" th:onclick="javascript:showMonitoringOption(this.getAttribute('data1'))"></label>
+			</a>
+		</th:block>
+	</nav>
+	
+	<div class="container-fluid">
+		<div id="configuration_area">
+			<div id="inner_monitoring_area"></div>
+		</div>
+	</div>
+</div>

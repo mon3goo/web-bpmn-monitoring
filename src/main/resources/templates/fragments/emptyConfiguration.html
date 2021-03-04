@@ -1,0 +1,11 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<header th:insert="header :: header"></header>
+
+<div th:fragment="home" id="inner_monitoring_area" class="inner_monitoring_area">
+	<div class="container-fluid">
+		No configuration detected! <a class="link-danger" href="#"> 
+				<label th:onclick="javascript:showEngineConfig()">
+				Add an engine!</label>
+			</a>
+	</div>
+</div>

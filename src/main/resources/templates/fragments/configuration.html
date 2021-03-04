@@ -1,0 +1,74 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<header th:insert="header :: header"></header>
+<head>
+	<script src="/mon3goo.web.bpmn.monitoring/js/app.configuration.js"></script>
+</head>
+
+<div th:fragment="home" id="inner_monitoring_area"
+	class="inner_monitoring_area">
+	<div class="container">
+		<div class="row">
+			<h1>Configured engines</h1>
+		</div>
+		<div class="row">
+			<div class="col-sm">
+				<table class="table" id="enginesList">
+					<thead>
+						<tr>
+							<th class="text-center" width="5%"><input type="checkbox"
+								th:name="chkAllReports" id="chkAllEngines"
+								th:onclick="'javascript:checkAllEngines()'" /></th>
+							<th scope="col">Number</th>
+							<th scope="col">Name</th>
+							<th scope="col">REST Endpoint</th>
+							<th scope="col">Deployed definitions</th>
+							<th scope="col">Active tasks</th>
+						</tr>
+					</thead>
+					<tbody>
+						<th:block th:each="engine : ${engines}">
+							<tr>
+							<td class="text-center"><input type="checkbox"
+								th:name="'chkConfiguredEngine_' + ${engine.id}"
+								th:id="'chkConfiguredEngine_' + ${engine.id}"
+								th:onclick="'javascript:checkEngineAction(' + ${engine.id} + ')'"
+								class="enginesCheckBox" /></td>
+								<td th:onclick="'javascript:loadEngineDetail(' + ${engine.id} + ')'">
+									<label th:text="${engine.id}"
+									th:data1="${engine.id}" class="menuLabel"
+									th:onclick="javascript:showMonitoringOption(this.getAttribute('data1'))"></label>
+								</td>
+								<td th:onclick="'javascript:loadEngineDetail(' + ${engine.id} + ')'">
+									<label th:text="${engine.engineDetail.name}"
+									th:data1="${engine.engineDetail.name}" class="menuLabel"
+									th:onclick="javascript:showMonitoringOption(this.getAttribute('data1'))"></label>
+								</td>
+								<td th:onclick="'javascript:loadEngineDetail(' + ${engine.id} + ')'">
+									<label th:text="${engine.engineDetail.restEndPoint}"
+									class="menuLabel"></label></td>
+								<td th:onclick="'javascript:loadEngineDetail(' + ${engine.id} + ')'">
+									<label
+									th:id="'engineDefinitions_' + ${engine.id}"
+									class="menuLabel"></label></td>
+								<td th:onclick="'javascript:loadEngineDetail(' + ${engine.id} + ')'">
+									<label
+									th:id="'engineActiveTasks_' + ${engine.id}"
+									class="menuLabel"></label></td>
+							</tr>
+						</th:block>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm">
+				<button type="button" class="btn btn-primary btn-sm pull-right" 
+					th:onclick="javascript:showEngineConfig()">Configure new engine</button>
+				<button class="btn btn-info btn-sm pull-right" type="button"
+						th:id="btn_delete_engine" name="btn_delete_engine" disabled
+						th:onclick="javascript:deleteMultipleEngines()">Delete engine(s)</button>
+				
+			</div>
+		</div>
+	</div>
+</div>

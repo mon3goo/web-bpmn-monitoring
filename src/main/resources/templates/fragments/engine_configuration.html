@@ -1,0 +1,82 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<header th:insert="header :: header"></header>
+
+<div th:fragment="home" id="inner_monitoring_area"
+	class="inner_monitoring_area">
+	<div class="container-fluid">
+		<form action="#" th:object="${engineConfig}">
+			<div class="row">
+				<div class="card border-primary mb-3 fullWidth">
+					<div class="card-header">
+						<div class="row">
+							<div class="col-md-11">Engine configuration</div>
+							<div class="col-md-1">
+<!-- 								<button type="button" class="btn-close"	aria-label="Close"> -->
+									<span class="float-right clickable close-icon pointer" 
+										data-effect="fadeOut"
+										th:onclick="javascript:closeEngineConfigArea()"><i class="fa fa-times"></i></span>
+<!-- 								</button> -->
+							</div>
+						</div>
+					</div>
+					<!-- 					<div class="col-auto"> -->
+					<div class="card-body text-primary">
+						<h5 th:if="${isNew}" class="card-title">New engine
+							configuration</h5>
+						<p th:if="${isNew}" class="card-text">Please, introduce the
+							needed engine configuration data</p>
+
+						<div class="row">
+							<div class="col-4">
+								<div class="col-auto">
+									<label class="form-label">Name</label> <input type="text"
+										th:field="*{engineDetail.name}" class="form-control"
+										id="engineName" placeholder="My new engine"> <label
+										th:if="${#fields.hasErrors('engineDetail.name')}"
+										th:errors="*{engineDetail.name}"> Please enter a valid
+										name </label>
+								</div>
+								<div class="col-auto">
+									<label class="form-label">Service REST endpoint</label> <input
+										type="text" th:field="*{engineDetail.restEndPoint}"
+										class="form-control" id="engineRestEndPoint"
+										placeholder="http://localhost:8080/flowable-rest/"> <label
+										th:if="${#fields.hasErrors('engineDetail.restEndPoint')}"
+										th:errors="*{engineDetail.restEndPoint}"> Please enter
+										a valid name </label>
+								</div>
+								<div class="col-auto">
+									<label class="form-label">User name</label> <input type="text"
+										th:field="*{engineDetail.user}" class="form-control"
+										id="engineUserName" placeholder="name@example.com"> <label
+										th:if="${#fields.hasErrors('engineDetail.user')}"
+										th:errors="*{engineDetail.user}"> Please enter a valid
+										name </label>
+								</div>
+								<div class="col-auto">
+									<label for="inputPassword2" class="visually-hidden">Password</label>
+									<input type="password" th:field="*{engineDetail.psw}"
+										class="form-control" id="enginePsw" placeholder="Password">
+									<label th:if="${#fields.hasErrors('engineDetail.psw')}"
+										th:errors="*{engineDetail.psw}"> Please enter a valid
+										name </label>
+								</div>
+								<div
+									class="col-12 mx-auto d-grid gap-2 d-md-flex justify-content-md-end">
+									<button th:if="${isNew}" type="button"
+										class="btn btn-primary btn-sm"
+										th:onclick="javascript:newEngineConfig()">Validate</button>
+									<button type="reset" class="btn btn-danger btn-sm">Reset</button>
+								</div>
+							</div>
+							<div class="col-8" id="engineDefinitionList"></div>
+						</div>
+					</div>
+					<!-- 					</div> -->
+
+
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
